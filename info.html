@@ -3,29 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/info.css">
-    <script src="info.js" defer></script>
-    <title>Document</title>
+    <title>Three.js Interactive Scene</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
 </head>
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 10;
 
-    <header>
-        <figure class="buttons-back">
-            <nav>
-             <ul>
-                 <li onclick="location.href='keuze.html';"  style="cursor:pointer;">&larr;</li>
-             </ul>
-            </nav>
-         </figure>
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
 
-         <li class="language"><a class="top" onclick="location.href='engels.html';"  style="cursor:pointer;"><img class="engels" src="img/engels.svg" alt=""></a></li>
-        
-        <li class="taal"><a class="top"onclick="location.href='info.html';"  style="cursor:pointer;"><img class="nederlands" src="img/nederlands.svg" alt=""></a></li>
+        // Orbit controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-    </header>
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+        scene.add(ambientLight);
 
-  
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
 
+        // Central Cube
+        const cubeGeometry = new THREE.BoxGeometry();
+        const cubeMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        scene.add(cube);
 
+        // Make the cube disappear after 5 seconds (5000 milliseconds)
+        setTimeout(() => {
+            scene.remove(cube);
+        }, 5000);
+
+        // Rotating Sphere
+        const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        scene.add(sphere);
+
+        // Variables for animation
+        let angle = 0;
+        const radius = 5;
+        let isRotating = false;
+
+        // Add event listener for toggling rotation
+        document.addEventListener('click', () => {
+            isRotating = !isRotating;
+        });
+
+        // Add event listener for mouse move
+        document.addEventListener('mousemove', (event) => {
+            if (!isRotating) {
+                const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
+                vector.unproject(camera);
+                const dir = vector.sub(camera.position).normalize();
+                const distance = -camera.position.z / dir.z;
+                const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+
+                cube.position.copy(pos);
+            }
+        });
+
+        // Render loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate the sphere around the central point if isRotating is true
+            if (isRotating) {
+                angle += 0.01;
+                sphere.position.x = radius * Math.cos(angle);
+                sphere.position.z = radius * Math.sin(angle);
+            }
+
+            // Update controls
+            controls.update();
+
+            // Render the scene from the perspective of the camera
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>

@@ -11,20 +11,21 @@ ul {
   }
 
 .buttons-back ul li {
-    font-size: 3rem; /* Adjust the font size as needed */
+    font-size: 3rem; 
 }
 
   
 
 body{
-    background: linear-gradient(to right, rgba(211, 118, 118) 20% ,rgba(244, 237, 204) 60%);
-    display: flex;
-    
-    
+    background: #EEE
 }
-/* Add this CSS to your info.css file */
 
-/* Add this CSS to your info.css file */
+.header-info{
+
+    display: flex;
+}
+
+
 
 .taal {
     position: absolute;
@@ -59,4 +60,24 @@ body{
     align-items: center;
     justify-content: center;
     padding-right: 2rem;
+}
+
+.main-info{
+    width: 100rem;
+    height: 16rem;
+    display: flex;
+    gap: 8rem;
+}
+
+.patricia{
+    width: 40rem;
+    height: 30rem;
+    
+
+}
+
+.personal-text{
+
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.5rem;
 }
