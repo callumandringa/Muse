@@ -7,9 +7,23 @@
     <style>
         body { margin: 0; }
         canvas { display: block; }
+        
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <div class="dot" style="top: 50px; left: 50px;"></div> <!-- Example dot 1 -->
+    <div class="dot" style="top: 100px; left: 150px;"></div> <!-- Example dot 2 -->
+    <div class="dot" style="top: 200px; left: 250px;"></div> <!-- Example dot 3 -->
+    <div class="dot" style="top: 300px; left: 350px;"></div> <!-- Example dot 4 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -26,7 +40,7 @@
         // Orbit controls
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-        // Load background texture
+        // Load background texture  
         const textureLoader = new THREE.TextureLoader();
         const backgroundTexture = textureLoader.load('img/Screenshot 2024-05-27 140228.png');
         
@@ -88,15 +102,47 @@
             action.play();
         });
 
+        // Function to redirect to a different HTML page
+function redirectToDifferentPage() {
+    // Redirect to the desired HTML page
+    window.location.replace('engels.html')
+}
+
+// WebSocket setup
+const socket = new WebSocket('ws://localhost:8080');
+
+socket.onmessage = function(event) {
+    const sensorValue = parseFloat(event.data);
+    // Map sensor value to a suitable range for Three.js
+    const mappedValue = THREE.MathUtils.mapLinear(sensorValue, 0, 1023, -5, 5);
+    if (model) {
+        model.position.x = mappedValue; // Update model position based on sensor value
+    }
+
+    // Check if the ball has stopped moving
+    if (Math.abs(mappedValue) < 0.01) {
+        // Ball has stopped moving, redirect to a different page
+        redirectToDifferentPage();
+    }
+};
+
+
         // Variables for animation
         let angle = 0;
         const radius = 5;
         let isRotating = false;
 
         // Add event listener for toggling rotation
-        document.addEventListener('click', () => {
-            isRotating = !isRotating;
-        });
+document.addEventListener('click', () => {
+    // Check if the ball is currently moving
+    if (!isRotating) {
+        // Do not toggle rotation if the ball is stopped
+        return;
+    }
+    
+    isRotating = !isRotating;
+});
+
 
         // Add event listener for mouse move
         document.addEventListener('mousemove', (event) => {
@@ -144,6 +190,56 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+
+        // Function to redirect to a different HTML page
+        function redirectToDifferentPage(page) {
+            // Redirect to the desired HTML page
+            window.location.replace(page);
+        }
+
+        function popUpBall() {
+            const initialScale = 0.5;
+            const finalScale = 1.0;
+            const duration = 1000; // Animation duration in milliseconds
+
+            let startTime = null;
+            function animateBall(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const scale = initialScale + (progress / duration) * (finalScale - initialScale);
+
+                // Apply scale to the ball
+                cube.scale.set(scale, scale, scale);
+
+                if (progress < duration) {
+                    // Continue the animation
+                    requestAnimationFrame(animateBall);
+                } else {
+                    // Animation completed
+                    cube.scale.set(finalScale, finalScale, finalScale);
+                }
+            }
+
+            // Start the animation
+            requestAnimationFrame(animateBall);
+        }
+
+        // Example: Assign onclick events to the dots
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.onclick = () => {
+                // Redirect to different pages based on the dot clicked
+                if (index === 0) {
+                    redirectToDifferentPage('page1.html');
+                } else if (index === 1) {
+                    redirectToDifferentPage('page2.html');
+                } else if (index === 2) {
+                    redirectToDifferentPage('page3.html');
+                } else if (index === 3) {
+                    redirectToDifferentPage('engels.html');
+                }
+            };
         });
     </script>
 </body>
