@@ -1,246 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Interactive Scene</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-        
+<!DOCTYPE HTML>
 
-        .dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: red;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="dot" style="top: 50px; left: 50px;"></div> <!-- Example dot 1 -->
-    <div class="dot" style="top: 100px; left: 150px;"></div> <!-- Example dot 2 -->
-    <div class="dot" style="top: 200px; left: 250px;"></div> <!-- Example dot 3 -->
-    <div class="dot" style="top: 300px; left: 350px;"></div> <!-- Example dot 4 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script>
-        // Scene setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 10;
+<html>
+	<head>
+		<title>Dimension by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		
+		<!-- Wrapper -->
+			<div id="wrapper">
+                <header></header>
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<img class="engels" onclick="location.href='infopage1.html';" style="cursor:pointer;" src="img/nederlands.svg" alt="">
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>museum</h1>
+								</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#intro">The arrival</a></li>
+								<li><a href="#work">Angry black men</a></li>
+								<li><a href="#about">test</a></li>
+								<li><a href="#contact">test</a></li>
+								<!--<li><a href="#elements">Elements</a></li>-->
+							</ul>
+						</nav>
+					</header>
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+				<!-- Main -->
+					<div id="main">
 
-        // Orbit controls
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+						<!-- Intro -->
+							<article id="intro">
+								<h2 class="major">The arrival</h2>
+								<span class="image main"><img src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
+								<p> In this part, Kaersenhout reimagines the arrival of European settlers in the early 17th century.
+                                    She interweaves historical events with dreamlike,
+                                    surreal elements to the shock and confusion of the encounter between the indigenous people and the newcomers
+                                    to emphasize. The story focuses on the first encounters, the exchanges of goods and ideas,
+                                    and the disruption these events caused in the lives of the Lenape.
+                                    
+                                 </p>
+								<p> 
 
-        // Load background texture  
-        const textureLoader = new THREE.TextureLoader();
-        const backgroundTexture = textureLoader.load('img/Screenshot 2024-05-27 140228.png');
-        
-        // Create background plane
-        const bgGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-        const bgMaterial = new THREE.MeshBasicMaterial({ map: backgroundTexture });
-        const backgroundPlane = new THREE.Mesh(bgGeometry, bgMaterial);
-        backgroundPlane.position.z = -462; // Set the background plane behind other objects
-        scene.add(backgroundPlane);
+                                    Kaersenhout paints scenes of the first contacts during which gifts were exchanged,
+                                    but also the misunderstandings and growing tensions that arose.
+                                    This section highlights the cultural clashes and the impact of European diseases on the indigenous population.
+                                </p>							</article>
 
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
-        scene.add(ambientLight);
+						<!-- Work -->
+							<article id="work">
+								<h2 class="major">
+                                    Angry Black Men</h2>
+								<span class="image main"><img src="img/tumblr_lwaqpeKiVn1qghymoo1_640.jpg" alt="" /></span>
+								<p>
+                                    The  Angry Black Men are painted with tar on canvas because of the paradox in meanings. As an adjective ‘teer’ in Dutch means fragile, frail and delicate while the noun teer (tar) in Dutch also means a tough, poisonous, black and impenetrable material. This symbolizes for me one of the characteristics of some black men.</p>
+							
+							</article>
 
-        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
-        pointLight.position.set(10, 10, 10);
-        scene.add(pointLight);
+						<!-- About -->
+							<article id="about">
+								<h2 class="major">About</h2>
+								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
+								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+							</article>
 
-        // Central Cube
-        const cubeGeometry = new THREE.BoxGeometry();
-        const cubeMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-        scene.add(cube);
-
-        // Make the cube disappear after 5 seconds (5000 milliseconds)
-        setTimeout(() => {
-            scene.remove(cube);
-        }, 5000);
-
-        // Load GLTF model and set up custom animation
-        const loader = new THREE.GLTFLoader();
-        let mixer;
-        let model;
-        loader.load('img/wood_table_001_4k.gltf', (gltf) => {
-            model = gltf.scene;
-            model.position.set(1, 1, 1); // Set the starting position of the model
-            scene.add(model);
-            model.scale.set(0.5, 0.5, 0.5); // Adjust the scale if necessary
-
-            // Set up the mixer
-            mixer = new THREE.AnimationMixer(model);
-
-            // Create custom animation
-            const times = [0, 1, 2, 3]; // Keyframe times in seconds
-            const values = [
-                8, 3, 3,    // At time 0: position (8, 3, 3)
-                -4, 3, 3,    // At time 1: position (-4, 3, 3)
-                -4, -2, -2,    // At time 2: position (-4, -2, -2)
-                0, 0, 0    // At time 3: position (0, 0, 0)
-            ];
-
-            const track = new THREE.VectorKeyframeTrack('.position', times, values);
-            const clip = new THREE.AnimationClip('custom_animation', -1, [track]);
-
-            // Create the action and play it
-            const action = mixer.clipAction(clip);
-            action.setLoop(THREE.LoopOnce); // Only play the animation once
-            action.clampWhenFinished = true; // Keep the last frame when finished
-            action.play();
-        });
-
-        // Function to redirect to a different HTML page
-function redirectToDifferentPage() {
-    // Redirect to the desired HTML page
-    window.location.replace('engels.html')
-}
-
-// WebSocket setup
-const socket = new WebSocket('ws://localhost:8080');
-
-socket.onmessage = function(event) {
-    const sensorValue = parseFloat(event.data);
-    // Map sensor value to a suitable range for Three.js
-    const mappedValue = THREE.MathUtils.mapLinear(sensorValue, 0, 1023, -5, 5);
-    if (model) {
-        model.position.x = mappedValue; // Update model position based on sensor value
-    }
-
-    // Check if the ball has stopped moving
-    if (Math.abs(mappedValue) < 0.01) {
-        // Ball has stopped moving, redirect to a different page
-        redirectToDifferentPage();
-    }
-};
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">test4</h2>
+								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
+								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+							
+							</article>
 
 
-        // Variables for animation
-        let angle = 0;
-        const radius = 5;
-        let isRotating = false;
+									
+							
 
-        // Add event listener for toggling rotation
-document.addEventListener('click', () => {
-    // Check if the ball is currently moving
-    if (!isRotating) {
-        // Do not toggle rotation if the ball is stopped
-        return;
-    }
-    
-    isRotating = !isRotating;
-});
+								
 
+							</article>
 
-        // Add event listener for mouse move
-        document.addEventListener('mousemove', (event) => {
-            if (!isRotating) {
-                const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-                
-                const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
-                vector.unproject(camera);
-                const dir = vector.sub(camera.position).normalize();
-                const distance = -camera.position.z / dir.z;
-                const pos = camera.position.clone().add(dir.multiplyScalar(distance));
+					</div>
 
-                cube.position.copy(pos);
-            }
-        });
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Museum amsterdam <a href="https://html5up.net"></a></p>
+					</footer>
 
-        // Render loop
-        function animate() {
-            requestAnimationFrame(animate);
+			</div>
 
-            // Rotate the model around the central point if isRotating is true
-            if (isRotating && model) {
-                angle += 0.01;
-                model.position.x = radius * Math.cos(angle);
-                model.position.z = radius * Math.sin(angle);
-            }
+		<!-- BG -->
+			<div id="bg"></div>
 
-            // Update mixer for custom animation
-            if (mixer) {
-                mixer.update(0.01); // Adjust delta time as needed
-            }
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
-            // Update controls
-            controls.update();
-
-            // Render the scene from the perspective of the camera
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-
-        // Function to redirect to a different HTML page
-        function redirectToDifferentPage(page) {
-            // Redirect to the desired HTML page
-            window.location.replace(page);
-        }
-
-        function popUpBall() {
-            const initialScale = 0.5;
-            const finalScale = 1.0;
-            const duration = 1000; // Animation duration in milliseconds
-
-            let startTime = null;
-            function animateBall(timestamp) {
-                if (!startTime) startTime = timestamp;
-                const progress = timestamp - startTime;
-                const scale = initialScale + (progress / duration) * (finalScale - initialScale);
-
-                // Apply scale to the ball
-                cube.scale.set(scale, scale, scale);
-
-                if (progress < duration) {
-                    // Continue the animation
-                    requestAnimationFrame(animateBall);
-                } else {
-                    // Animation completed
-                    cube.scale.set(finalScale, finalScale, finalScale);
-                }
-            }
-
-            // Start the animation
-            requestAnimationFrame(animateBall);
-        }
-
-        // Example: Assign onclick events to the dots
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.onclick = () => {
-                // Redirect to different pages based on the dot clicked
-                if (index === 0) {
-                    redirectToDifferentPage('page1.html');
-                } else if (index === 1) {
-                    redirectToDifferentPage('page2.html');
-                } else if (index === 2) {
-                    redirectToDifferentPage('page3.html');
-                } else if (index === 3) {
-                    redirectToDifferentPage('engels.html');
-                }
-            };
-        });
-    </script>
-</body>
+	</body>
 </html>
+
+
+
+
+

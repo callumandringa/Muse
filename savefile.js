@@ -1,63 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Interactive Scene</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
 
-        .dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: red;
-            cursor: pointer;
-        }
-    </style>
-
-    <script>
-    document.addEventListener('mousemove', function(event) {
-        const box = document.getElementById('box');
-        box.style.left = event.pageX + 'px';
-        box.style.top = event.pageY + 'px';
-    });
-    
-    document.addEventListener('click', function(event) {
-        const box = document.getElementById('box');
-        box.style.backgroundColor = box.style.backgroundColor === 'red' ? 'blue' : 'red';
-    });
-    </script>
-</head>
-<body>
-    <div class="dot" style="top: 425px; left: 635px;"></div> <!-- Example dot 1 -->
-    
-    <div class="dot" style="top: 495px; right: 695px;"></div> <!-- Example dot 4 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script>
         // Scene setup
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, 800 / 600, 0.1, 1000);
         camera.position.set(0, 20, 0); // Set the initial camera position
         camera.lookAt(0, 0, 0); // Look at the center of the scene
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // Orbit controls
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        renderer.setSize(800, 600); // Set canvas size
+        document.querySelector('.canvas-container').appendChild(renderer.domElement);
 
         // Load background texture  
         const textureLoader = new THREE.TextureLoader();
         const backgroundTexture = textureLoader.load('img/Screenshot 2024-05-27 140228.png');
-        
+
         // Create background plane
-        const bgGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+        const bgGeometry = new THREE.PlaneGeometry(800, 600);
         const bgMaterial = new THREE.MeshBasicMaterial({ map: backgroundTexture });
         const backgroundPlane = new THREE.Mesh(bgGeometry, bgMaterial);
         backgroundPlane.position.z = -462; // Set the background plane behind other objects
@@ -79,8 +36,8 @@
             model = gltf.scene;
             model.position.set(1, 1, 1); // Set the starting position of the model
             scene.add(model);
-            model.position.y = 10
-            model.position.x = -0.01
+            model.position.y = 10;
+            model.position.x = -0.01;
             model.scale.set(0.5, 0.5, 0.5); // Adjust the scale if necessary
 
             // Set up the mixer
@@ -115,7 +72,7 @@
         // Function to redirect to a different HTML page
         function redirectToDifferentPage() {
             // Redirect to the desired HTML page
-            window.location.replace('infopage1.html');
+            window.location.replace('engels.html');
         }
 
         // WebSocket setup
@@ -167,10 +124,8 @@
 
         // Handle window resize
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.aspect = 800 / 600;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(800, 600);
         });
-    </script>
-</body>
-</html>
+   
