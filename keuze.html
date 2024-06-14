@@ -4,27 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/keuze.css">
-    <script src="keuze.js" defer></script>
     <script src="https://kit.fontawesome.com/b85dc83dd9.js" crossorigin="anonymous"></script>
     <title>Document</title>
+    <style>
+        /* Add fade-out effect */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+    </style>
 </head>
 <body>
+    <video id="myVideo" controls autoplay>
+        <source src="video/HERSTEL_M8BO_animatie_1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <script>
+        // Get the video element
+        const video = document.getElementById('myVideo');
 
-    <style>
-        body { margin: 0; }
-        .canvas-container {
-            width:800px; /* Set desired width */
-            height: 600px; /* Set desired height */
-            margin: auto; /* Center the canvas */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: black; /* Optional: background color for container */
-        }
-        canvas { display: block; }
+        // Add an event listener for the 'ended' event
+        video.addEventListener('ended', () => {
+            // Add fade-out class to body
+            document.body.classList.add('fade-out');
 
-       
-    </style>
+            // Wait for the transition to complete before redirecting
+            setTimeout(() => {
+                window.location.href = 'info.html';
+            }, 1000); // Match this timeout with the CSS transition duration
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    
     <figure class="buttons">
         <a class="top" onclick="location.href='info.html';" style="cursor:pointer;">
             <span></span>
@@ -32,9 +56,4 @@
             <span> <i class="fa-solid fa-globe"></i></span>  
             <span></span>
         </a>
-    </figure>
-    
-   
-
-</body>
-</html>
+    </figure> -->
