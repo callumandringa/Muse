@@ -12,14 +12,28 @@ int maxima[] = {0, 0};
 int axis[] = {xAxis, yAxis};
 int mouseReading[2];
 
+int inPin = 2; 
+int val = 0;
+
 void setup() {
   Mouse.begin();
+  pinMode(inPin, INPUT); 
+  Serial.begin(9600);
 }
 
 void loop() {
   int xReading = readAxis(0);
   int yReading = readAxis(1);
   Mouse.move(xReading, yReading, 0);
+
+  val = digitalRead(inPin); 
+  if (val == HIGH) { 
+    Serial.println("er is op de knop gedrukt"); 
+    Mouse.click();
+  } else {
+    Serial.println("druk op de knop");
+  }
+  
   delay(responseDelay);
 }
 
@@ -41,8 +55,3 @@ int readAxis(int axisNumber) {
   }
   return distance;
 }
-
-
-
-int inPin = 2; 
-int val = 0; 
