@@ -20,64 +20,12 @@ body{
     background: #EEE
 }
 
-.header-info{
-
-    display: flex;
+footer{
+    width: 20rem;
+    height: 20rem;
+    background: black
 }
 
-
-
-.taal {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    margin-top: 4rem;
-    margin-right: 6rem;
-}
-
-.language{
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    margin-top: 4rem;
-    margin-right: 1rem;
-}
-
-
-
-
-
-.buttons-back{
-    display: flex;
-    width: 10rem;
-    height: 5rem;
-    border-radius: 10%;
-    min-height:100%;
-
-    list-style: none;
-    align-items: center;
-    justify-content: center;
-    padding-right: 2rem;
-}
-
-.main-info{
-    width: 100rem;
-    height: 16rem;
-    display: flex;
-    gap: 8rem;
-}
-
-.patricia{
-    width: 40rem;
-    height: 30rem;
-    
-
-}
-
-.personal-text{
-
-    font-family: "Times New Roman", Times, serif;
-    font-size: 1.5rem;
+.close{
+    color: blueviolet;
 }

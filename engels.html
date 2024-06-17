@@ -22,6 +22,8 @@
             cursor: pointer;
         }
 
+        a::vis
+
         /* Commented out dot2 and dot3 as they're not being used currently 
         .dot2 {
             position: absolute;
@@ -51,7 +53,7 @@
             </div>
             <div class="content">
                 <div class="inner">
-                    <h1>museum</h1>
+                    <h1>Museum</h1>
                     <h2>Patricia Kaersenhout</h2>
                 </div>
             </div>
@@ -76,18 +78,17 @@
         <div id="main">
             <!-- Intro -->
             <article id="intro">
-                <h2 class="major">arrival</h2>
-                <span class="image main"><img src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
+                <h2 class="major">Arrival</h2>
+                <span class="image main"><img width="300px" height="200px"  src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
                 <p>In dit deel herbeeldt Kaersenhout de aankomst van Europese kolonisten in de vroege 17e eeuw. Ze verweeft historische gebeurtenissen met droomachtige, surrealistische elementen om de schok en verwarring van de ontmoeting tussen de inheemse bevolking en de nieuwkomers te benadrukken. Het verhaal richt zich op de eerste ontmoetingen, de uitwisselingen van goederen en ideeën, en de ontwrichting die deze gebeurtenissen veroorzaakten in het leven van de Lenape.</p>
                 <p>Kaersenhout schildert scènes van de eerste contacten waarbij geschenken werden uitgewisseld, maar ook de misverstanden en de groeiende spanningen die ontstonden. Dit deel benadrukt de culturele botsingen en de impact van Europese ziekten op de inheemse bevolking.</p>
             </article>
 
             <!-- Work -->
             <article id="work">
-                <h2 class="major">angry black men</h2>
-                <span class="image main"><img src="img/tumblr_lwaqpeKiVn1qghymoo1_640.jpg" alt="" /></span>
-                <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-                <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+                <h2 class="major">Angry black men</h2>
+                <span class="image main"><img height="300px" src="img/tumblr_lwaqpeKiVn1qghymoo1_640.jpg" alt="" /></span>
+                <p>De Angry Black Men zijn met teer op doek geschilderd vanwege de paradox in betekenissen. Het bijvoeglijk naamwoord teer betekent in het Nederlands breekbaar, broos en delicaat, terwijl het zelfstandig naamwoord teer (teer) in het Nederlands ook een taai, giftig, zwart en ondoordringbaar materiaal betekent. Dit symboliseert voor mij een van de kenmerken van sommige zwarte mannen.</p>    
             </article>
 
             <!-- About -->
@@ -105,6 +106,13 @@
                 <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
             </article>
         </div>
+
+
+        <footer style="background:  0xbfd1e5; height: 167px; width: 1980px; margin-top: 200px; display:flex; position: relative; ">
+            <a href="https://www.pkaersenhout.com/" style="position: absolute; left: 37%; cursor: pointer; color: gray; text-decoration: none; :visited"> About </a>
+            <div  style="position: absolute; left: 37%; top: 25%;">  More </div>
+
+        </footer>
 
       
     </div>
@@ -129,7 +137,7 @@
         // Scene setup
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 20, 0); // Set the initial camera position
+        camera.position.set(0, 29, 0); // Set the initial camera position
         camera.lookAt(0, 0, 0); // Look at the center of the scene
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -143,6 +151,7 @@
         // Load background texture  
         const textureLoader = new THREE.TextureLoader();
         const backgroundTexture = textureLoader.load('img/Screenshot 2024-05-27 140228.png');
+        texture.colorSpace = THREE.SRGBColorSpace;
         
         // Create background plane
         const bgGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);

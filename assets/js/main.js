@@ -292,7 +292,7 @@
 				var $this = $(this);
 
 				// Close.
-					$('<div class="close">Close</div>')
+					$('<div style="color:  red; cursor:pointer; font-size:30px;"  class="close">Return to main page</div>')
 						.appendTo($this)
 						.on('click', function() {
 							location.hash = '';
