@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Interactive Scene</title>
+    <title>BO Museum</title>
     <style>
         body { margin: 0; }
         canvas { 
@@ -38,6 +38,11 @@
             border-radius: 50%;
             cursor: pointer;
         } */
+        p{
+
+        }
+
+        
     </style>
 </head>
 <body>
@@ -47,46 +52,47 @@
         <!-- Header -->
         <header id="header">
             <div class="logo">
-                <img class="engels" onclick="location.href='engels.html';" style="cursor:pointer;" src="img/engels.svg" alt="">
+                <img class="engels" onclick="location.href='engels.html';" style="cursor:pointer;" src="img/nederlands.svg" alt="">
             </div>
             <div class="content">
                 <div class="inner">
-                    <h1>museum</h1>
+                    <h1>Museum</h1>
+                    <h2>Patricia Kaersenhout</h2>
                 </div>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#intro">De aankomst</a></li>
-                    <li><a href="#work">angry black men</a></li>
-                    <li><a href="#about">test3</a></li>
-                    <li><a href="#contact">test</a></li>
+                    <li><a style="color: black;" href="#intro">The Arrival</a></li>
+                    <li><a style="color: black;" href="#work">Angry black men</a></li>
+                    <li><a style="color: black;" href="#contact">test</a></li>
+                    <li><a style="color: black;" href="keuze.html">Animatie</a></li>
                 </ul>
             </nav>
         </header>
-        <div class="back-to-index">
+        <!-- <div class="back-to-index">
             <a href="keuze.html">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                     <path d="M0 0h24v24H0z" fill="none"/>
                     <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
                 </svg>
             </a>
-        </div>
+        </div> -->
         <!-- Main -->
         <div id="main">
             <!-- Intro -->
             <article id="intro">
-                <h2 class="major">aankomst</h2>
-                <span class="image main"><img src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
+                <h2 class="major">arrival</h2>
+                <span class="image main"><img width="300px" height="200px" src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
                 <p>In dit deel herbeeldt Kaersenhout de aankomst van Europese kolonisten in de vroege 17e eeuw. Ze verweeft historische gebeurtenissen met droomachtige, surrealistische elementen om de schok en verwarring van de ontmoeting tussen de inheemse bevolking en de nieuwkomers te benadrukken. Het verhaal richt zich op de eerste ontmoetingen, de uitwisselingen van goederen en ideeën, en de ontwrichting die deze gebeurtenissen veroorzaakten in het leven van de Lenape.</p>
                 <p>Kaersenhout schildert scènes van de eerste contacten waarbij geschenken werden uitgewisseld, maar ook de misverstanden en de groeiende spanningen die ontstonden. Dit deel benadrukt de culturele botsingen en de impact van Europese ziekten op de inheemse bevolking.</p>
             </article>
 
             <!-- Work -->
             <article id="work">
-                <h2 class="major">test2</h2>
-                <span class="image main"><img src="img/Screenshot 2024-05-27 140228.png" alt="" /></span>
-                <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-                <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+                <h2 class="major">angry black men</h2>
+                <span class="image main"><img height="300px" src="img/tumblr_lwaqpeKiVn1qghymoo1_640.jpg" alt="" /></span>
+                <p style="margin-top: 100px;">
+                    The  Angry Black Men are painted with tar on canvas because of the paradox in meanings. As an adjective ‘teer’ in Dutch means fragile, frail and delicate while the noun teer (tar) in Dutch also means a tough, poisonous, black and impenetrable material. This symbolizes for me one of the characteristics of some black men.</p>   
             </article>
 
             <!-- About -->
@@ -105,10 +111,7 @@
             </article>
         </div>
 
-        <!-- Footer -->
-        <footer id="footer">
-            <p class="copyright">&copy; Museum amsterdam <a href="https://html5up.net"></a></p>
-        </footer>
+      
     </div>
 
     <!-- BG -->
@@ -136,6 +139,7 @@
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0xbfd1e5, 1); // Set background color to light blue
         document.body.appendChild(renderer.domElement);
 
         // Orbit controls
@@ -143,7 +147,7 @@
 
         // Load background texture  
         const textureLoader = new THREE.TextureLoader();
-        const backgroundTexture = textureLoader.load('img/Screenshot 2024-05-27 140228.png');
+        const backgroundTexture = textureLoader.load('');
         
         // Create background plane
         const bgGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
@@ -153,7 +157,7 @@
         scene.add(backgroundPlane);
 
         // Lights
-        const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+        const ambientLight = new THREE.AmbientLight(0xfff); // soft white light
         scene.add(ambientLight);
 
         const pointLight = new THREE.PointLight(0xffffff, 1, 200);
@@ -164,7 +168,7 @@
         const loader = new THREE.GLTFLoader();
         let mixer;
         let model;  
-        loader.load('img/Diorama_blockout.gltf', (gltf) => {
+        loader.load('img/Diorama1.gltf', (gltf) => {
             model = gltf.scene;
             model.position.set(1, 1, 1); // Set the starting position of the model
             scene.add(model);
@@ -176,7 +180,8 @@
             mixer = new THREE.AnimationMixer(model);
 
             // Create custom animation
-            const times = [0, 1, 2, 3]; // Keyframe times in seconds
+            const times = [0, 1
+, 2, 3]; // Keyframe times in seconds
             const values = [
                 3, 1, 1,    // At time 0: position (8, 3, 3)
                 -3, 1, 1,    // At time 1: position (-4, 3, 3)

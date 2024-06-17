@@ -1,128 +1,266 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Interactive Scene</title>
+    <style>
+        body { margin: 0; }
+        canvas { 
+            display: block; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-<html>
-	<head>
-		<title>Dimension by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		
-		<!-- Wrapper -->
-			<div id="wrapper">
-                <header></header>
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<img class="engels" onclick="location.href='infopage1.html';" style="cursor:pointer;" src="img/nederlands.svg" alt="">
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>museum</h1>
-								</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">The arrival</a></li>
-								<li><a href="#work">Angry black men</a></li>
-								<li><a href="#about">test</a></li>
-								<li><a href="#contact">test</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
-					<div class="back-to-index">
-						<a href="keuze.html">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-								<path d="M0 0h24v24H0z" fill="none"/>
-								<path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-							</svg>
-						</a>
-					</div>
+        .dot {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
 
-				<!-- Main -->
-					<div id="main">
+        /* Commented out dot2 and dot3 as they're not being used currently 
+        .dot2 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">The arrival</h2>
-								<span class="image main"><img src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
-								<p> In this part, Kaersenhout reimagines the arrival of European settlers in the early 17th century.
-                                    She interweaves historical events with dreamlike,
-                                    surreal elements to the shock and confusion of the encounter between the indigenous people and the newcomers
-                                    to emphasize. The story focuses on the first encounters, the exchanges of goods and ideas,
-                                    and the disruption these events caused in the lives of the Lenape.
-                                    
-                                 </p>
-								<p> 
+        .dot3 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+        } */
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <div id="wrapper">
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">
+                <img class="engels" onclick="location.href='info.html';" style="cursor:pointer;" src="img/engels.svg" alt="">
+            </div>
+            <div class="content">
+                <div class="inner">
+                    <h1>museum</h1>
+                    <h2>Patricia Kaersenhout</h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">de aankomst</a></li>
+                    <li><a href="#work">angry black men</a></li>
+                    <li><a href="#contact">test</a></li>
+					<li><a href="keuze.html">Animatie</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!-- <div class="back-to-index">
+            <a href="keuze.html">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+        </div> -->
+        <!-- Main -->
+        <div id="main">
+            <!-- Intro -->
+            <article id="intro">
+                <h2 class="major">arrival</h2>
+                <span class="image main"><img src="img/portrait-kaersenhout-patricia.jpg" alt="" /></span>
+                <p>In dit deel herbeeldt Kaersenhout de aankomst van Europese kolonisten in de vroege 17e eeuw. Ze verweeft historische gebeurtenissen met droomachtige, surrealistische elementen om de schok en verwarring van de ontmoeting tussen de inheemse bevolking en de nieuwkomers te benadrukken. Het verhaal richt zich op de eerste ontmoetingen, de uitwisselingen van goederen en ideeën, en de ontwrichting die deze gebeurtenissen veroorzaakten in het leven van de Lenape.</p>
+                <p>Kaersenhout schildert scènes van de eerste contacten waarbij geschenken werden uitgewisseld, maar ook de misverstanden en de groeiende spanningen die ontstonden. Dit deel benadrukt de culturele botsingen en de impact van Europese ziekten op de inheemse bevolking.</p>
+            </article>
 
-                                    Kaersenhout paints scenes of the first contacts during which gifts were exchanged,
-                                    but also the misunderstandings and growing tensions that arose.
-                                    This section highlights the cultural clashes and the impact of European diseases on the indigenous population.
-                                </p>							</article>
+            <!-- Work -->
+            <article id="work">
+                <h2 class="major">angry black men</h2>
+                <span class="image main"><img src="img/tumblr_lwaqpeKiVn1qghymoo1_640.jpg" alt="" /></span>
+                <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
+                <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+            </article>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">
-                                    Angry Black 
-									<br>
-									<br>
-									 Men</h2>
-								<span class="image main"><img src="img/tumblr_lwaqpeKiVn1qghymoo1_640.jpg" alt="" /></span>
-								<p>
-                                    The  Angry Black Men are painted with tar on canvas because of the paradox in meanings. As an adjective ‘teer’ in Dutch means fragile, frail and delicate while the noun teer (tar) in Dutch also means a tough, poisonous, black and impenetrable material. This symbolizes for me one of the characteristics of some black men.</p>
-							
-							</article>
+            <!-- About -->
+            <article id="about">
+                <h2 class="major">About</h2>
+                <span class="image main"><img src="images/pic03.jpg" alt="" /></span>
+                <p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+            </article>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-							</article>
+            <!-- Contact -->
+            <article id="contact">
+                <h2 class="major">test4</h2>
+                <span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+                <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
+                <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+            </article>
+        </div>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">test4</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							
-							</article>
+      
+    </div>
 
+    <!-- BG -->
+    <div id="bg"></div>
 
-									
-							
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
-								
+    
+  
 
-							</article>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 20, 0); // Set the initial camera position
+        camera.lookAt(0, 0, 0); // Look at the center of the scene
 
-					</div>
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0xbfd1e5, 1); // Set background color to light blue
+        document.body.appendChild(renderer.domElement);
 
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; Museum amsterdam <a href="https://html5up.net"></a></p>
-					</footer>
+        // Orbit controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-			</div>
+        // Load background texture  
+        const textureLoader = new THREE.TextureLoader();
+        const backgroundTexture = textureLoader.load('img/Screenshot 2024-05-27 140228.png');
+        
+        // Create background plane
+        const bgGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+        const bgMaterial = new THREE.MeshBasicMaterial({ map: backgroundTexture });
+        const backgroundPlane = new THREE.Mesh(bgGeometry, bgMaterial);
+        backgroundPlane.position.z = -462; // Set the background plane behind other objects
+        scene.add(backgroundPlane);
 
-		<!-- BG -->
-			<div id="bg"></div>
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xfff); // soft white light
+        scene.add(ambientLight);
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        const pointLight = new THREE.PointLight(0xffffff, 1, 200);
+        pointLight.position.set(10, 40, 10);
+        scene.add(pointLight);
 
-	</body>
+        // Load GLTF model and set up custom animation
+        const loader = new THREE.GLTFLoader();
+        let mixer;
+        let model;  
+        loader.load('img/Diorama1.gltf', (gltf) => {
+            model = gltf.scene;
+            model.position.set(1, 1, 1); // Set the starting position of the model
+            scene.add(model);
+            model.position.y = 10;
+            model.position.x = -0.01;
+            model.scale.set(0.5, 0.5, 0.5); // Adjust the scale if necessary
+
+            // Set up the mixer
+            mixer = new THREE.AnimationMixer(model);
+
+            // Create custom animation
+            const times = [0, 1
+, 2, 3]; // Keyframe times in seconds
+            const values = [
+                3, 1, 1,    // At time 0: position (8, 3, 3)
+                -3, 1, 1,    // At time 1: position (-4, 3, 3)
+                -4, -2, -2,    // At time 2: position (-4, -2, -2)
+                0, -5, 0    // At time 3: position (0, 0, 0)
+            ];
+
+            const track = new THREE.VectorKeyframeTrack('.position', times, values);
+            const clip = new THREE.AnimationClip('custom_animation', -1, [track]);
+
+            // Create the action and play it
+            const action = mixer.clipAction(clip);
+            action.setLoop(THREE.LoopOnce); // Only play the animation once
+            action.clampWhenFinished = true; // Keep the last frame when finished
+            action.play();
+
+            // Listen for the animation to end
+            action.finished.then(() => {
+                // Set camera to top-down view after the animation finishes
+                camera.position.set(0, 50, 0);
+                camera.rotation.set(-Math.PI / 2, 0, 0);
+            });
+        });
+
+        // Function to redirect to a different HTML page
+        function redirectToDifferentPage(url) {
+            // Redirect to the desired HTML page
+            window.location.replace(url);
+        }
+
+        // WebSocket setup
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onmessage = function(event) {
+            const sensorValue = parseFloat(event.data);
+            // Map sensor value to a suitable range for Three.js
+            const mappedValue = THREE.MathUtils.mapLinear(sensorValue, 0, 1023, -5, 5);
+            if (model) {
+                model.position.x = mappedValue; // Update model position based on sensor value
+            }
+
+            // Check if the ball has stopped moving
+            if (Math.abs(mappedValue) < 0.01) {
+                // Ball has stopped moving, redirect to a different page
+                redirectToDifferentPage('infopage1.html');
+            }
+        };
+
+        // Example: Assign onclick events to the dots
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.onclick = () => {
+                // Redirect to different pages based on the dot clicked
+                if (index === 0) {
+                    redirectToDifferentPage('infopage1.html');
+                } else if (index === 1) {
+                    redirectToDifferentPage('engels.html');
+                }
+            };
+        });
+
+        // Render loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update controls
+            controls.update();
+
+            // Rotate the model
+            if (model) {
+                model.rotation.y += 0.01; // Adjust the rotation speed as needed
+            }
+
+            // Render the scene from the perspective of the camera
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
 </html>
-
-
-
-
-
