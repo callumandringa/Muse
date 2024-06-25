@@ -15,43 +15,77 @@ int mouseReading[2];
 int inPin = 2; 
 int val = 0;
 
+int speedX = 5;
+int speedY = 5;
+
+int inPin1 = 3;
+int inPin2 = 5;
+int inPin3 = 6;
+int inPin4 = 7;
+
+int val1 = 0;
+int val2 = 0;
+int val3 = 0;
+int val4 = 0;
+
+unsigned long prevStateTime = 0;
+unsigned long currentTime = 0;
+bool prevState = false;
+
+
 void setup() {
   Mouse.begin();
   pinMode(inPin, INPUT); 
+  pinMode(inPin1, INPUT); 
+  pinMode(inPin2, INPUT); 
+  pinMode(inPin3, INPUT); 
+  pinMode(inPin4, INPUT); 
   Serial.begin(9600);
 }
 
 void loop() {
-  int xReading = readAxis(0);
-  int yReading = readAxis(1);
-  Mouse.move(xReading, yReading, 0);
 
-  val = digitalRead(inPin); 
-  if (val == HIGH) { 
-    Serial.println("er is op de knop gedrukt"); 
-    Mouse.click();
-  } else {
-    Serial.println("druk op de knop");
+   int x = 0, y = 0;
+
+  val = digitalRead(inPin);
+  currentTime = micros();
+  
+  if (val != prevState && currentTime >= prevStateTime + 14500 || val != prevState && currentTime <= prevStateTime - 14500 ) { 
+    prevStateTime = currentTime;
+    prevState = val;
+
+    if(val == 1){
+      Serial.println("click");
+      Mouse.click();
+    }
+  }
+
+  //joystick
+  val1 = digitalRead(inPin1); 
+  if (val1 == HIGH) { 
+    Serial.println("inpin 1");
+    y--; 
+  }
+
+val2 = digitalRead(inPin2); 
+  if (val2 == HIGH) { 
+    //Serial.println("inpin 2"); 
+    y++;
+  }
+
+  val3 = digitalRead(inPin3); 
+  if (val3 == HIGH) { 
+    //Serial.println("inpin 3"); 
+    x--;
+  }
+
+val4= digitalRead(inPin4); 
+  if (val4 == HIGH) { 
+    //Serial.println("inpin 4"); 
+    x++;
   }
   
-  delay(responseDelay);
-}
-
-int readAxis(int axisNumber) {
-  int distance = 0;
-  int reading = analogRead(axis[axisNumber]);
-  if (reading < minima[axisNumber]) {
-    minima[axisNumber] = reading;
-  }
-  if (reading > maxima[axisNumber]) {
-    maxima[axisNumber] = reading;
-  }
-  reading = map(reading, minima[axisNumber], maxima[axisNumber], 0, range);
-  if (abs(reading - center) > threshold) {
-    distance = (reading - center);
-  }
-  if (axisNumber == 1) {
-    distance = -distance;
-  }
-  return distance;
+  Mouse.move(x * speedX, y * speedY, 0);
+ delay(responseDelay);
+//delay(500);
 }
