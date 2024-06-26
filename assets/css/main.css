@@ -8,7 +8,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
-    background-color: #000; /* Black background color */
+    background-color: rgb(167, 217, 223); /* Black background color */
     color: #444;
     height: 100%;
     display: flex;
@@ -146,4 +146,12 @@ article p {
     article p {
         font-size: 1em;
     }
+}
+
+.video{
+   position: absolute;
+    z-index: -1;
+   height: 865px;
+   margin-top: -8.8rem;
+    
 }

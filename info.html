@@ -53,6 +53,7 @@
         <header id="header">
             <div class="logo">
                 <img class="engels" onclick="location.href='engels.html';" style="cursor:pointer;" src="img/nederlands.svg" alt="">
+                <p>Change language</p>
             </div>
             <div class="content">
                 <div class="inner">
@@ -64,8 +65,8 @@
                 <ul>
                     <li><a style="color: black;" href="#intro">The Arrival</a></li>
                     <li><a style="color: black;" href="#work">Angry black men</a></li>
-                    <li><a style="color: black;" href="#contact">Objects of love and Desire</a></li>
-                    <li><a style="color: black;" href="keuze.html">Animatie</a></li>
+                    <li><a style="color: black;" href="#about">Objects of love and Desire</a></li>
+                    <li><a style="color: black;" href="keuze.html">Animation</a></li>
                 </ul>
             </nav>
         </header>
@@ -98,7 +99,7 @@
             <!-- About -->
             <article id="about">
                 <h2 class="major">Object of love and Desire</h2>
-                <span class="image main"><img src="img/Solange-Duval-kopie-1-1.jpg" alt="" /></span>
+                <span class="image main"><img width="300px" src="img/Solange-Duval-kopie-1-1.jpg" alt="" /></span>
                 <p>The  textile works Objects of Love and Desire (2019) depict women in action. Portraits of Una Marson, Solange Fitte-Duval, Eslanda Robeson and Amy Garvey are rendered in a distinctive mode of digitally and traditionally printed fabrics, both hand- and machine-embroidered, with highlights of fine bead-work and appliqué. These four important black scholars, journalists, poets, activists hinges on their commonalities: all of Caribbean descent, but influential world-wide; all part of communist, Pan-Africanist, and transnational feminist movements; all active in the second half of the 20th century, though largely forgotten or erased from popular memory. Each of these women used her lifetime to fight racism, poverty and general inequality.
 
                     The women are shown as heroic figures, based on Chinese propaganda posters that express the glorification of the proletariat. Each banner is framed with printed cottons that the artist has collected from the African continent. Intricate bead-work highlights their features. The poems of Una Marson accomany three of the portraits, over-printed with the powerfully symbolic okra flower; and botanical illustrations by Maria Sibylla Merian, a 17th Century German-born naturalist who studied the insects of Suriname.</p>    
@@ -117,12 +118,7 @@
       
     </div>
 
-    
-    <footer style="background:  0xbfd1e5; height: 167px; width: 1980px; margin-top: 200px; display:flex; position: relative; ">
-        <div style="position: absolute; left: 37%;"> About </div>
-        <div  style="position: absolute; left: 37%; top: 25%;">  More </div>
-
-    </footer>
+   
 
     <!-- BG -->
     <div id="bg"></div>
@@ -135,147 +131,8 @@
     <script src="assets/js/main.js"></script>
 
     
+  <video  autoplay loop class="video" src="video/DioramaFilm-0306 1.mp4"></video>
+
   
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script>
-        // Scene setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 29, 0); // Set the initial camera position
-        camera.lookAt(0, 0, 0); // Look at the center of the scene
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0xbfd1e5, 1); // Set background color to light blue
-        document.body.appendChild(renderer.domElement);
-
-        // Orbit controls
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-        // Load background texture  
-        const textureLoader = new THREE.TextureLoader();
-        const backgroundTexture = textureLoader.load('');
-        
-        // Create background plane
-        const bgGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-        const bgMaterial = new THREE.MeshBasicMaterial({ map: backgroundTexture });
-        const backgroundPlane = new THREE.Mesh(bgGeometry, bgMaterial);
-        backgroundPlane.position.z = -462; // Set the background plane behind other objects
-        scene.add(backgroundPlane);
-
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0xfff); // soft white light
-        scene.add(ambientLight);
-
-        const pointLight = new THREE.PointLight(0xffffff, 1, 200);
-        pointLight.position.set(10, 40, 10);
-        scene.add(pointLight);
-
-        // Load GLTF model and set up custom animation
-        const loader = new THREE.GLTFLoader();
-        let mixer;
-        let model;  
-        loader.load('img/Diorama1.gltf', (gltf) => {
-            model = gltf.scene;
-            model.position.set(1, 1, 1); // Set the starting position of the model
-            scene.add(model);
-            model.position.y = 10;
-            model.position.x = -0.01;
-            model.scale.set(0.5, 0.5, 0.5); // Adjust the scale if necessary
-
-            // Set up the mixer
-            mixer = new THREE.AnimationMixer(model);
-
-            // Create custom animation
-            const times = [0, 1
-, 2, 3]; // Keyframe times in seconds
-            const values = [
-                3, 1, 1,    // At time 0: position (8, 3, 3)
-                -3, 1, 1,    // At time 1: position (-4, 3, 3)
-                -4, -2, -2,    // At time 2: position (-4, -2, -2)
-                0, -5, 0    // At time 3: position (0, 0, 0)
-            ];
-
-            const track = new THREE.VectorKeyframeTrack('.position', times, values);
-            const clip = new THREE.AnimationClip('custom_animation', -1, [track]);
-
-            // Create the action and play it
-            const action = mixer.clipAction(clip);
-            action.setLoop(THREE.LoopOnce); // Only play the animation once
-            action.clampWhenFinished = true; // Keep the last frame when finished
-            action.play();
-
-            // Listen for the animation to end
-            action.finished.then(() => {
-                // Set camera to top-down view after the animation finishes
-                camera.position.set(0, 50, 0);
-                camera.rotation.set(-Math.PI / 2, 0, 0);
-            });
-        });
-
-        // Function to redirect to a different HTML page
-        function redirectToDifferentPage(url) {
-            // Redirect to the desired HTML page
-            window.location.replace(url);
-        }
-
-        // WebSocket setup
-        const socket = new WebSocket('ws://localhost:8080');
-
-        socket.onmessage = function(event) {
-            const sensorValue = parseFloat(event.data);
-            // Map sensor value to a suitable range for Three.js
-            const mappedValue = THREE.MathUtils.mapLinear(sensorValue, 0, 1023, -5, 5);
-            if (model) {
-                model.position.x = mappedValue; // Update model position based on sensor value
-            }
-
-            // Check if the ball has stopped moving
-            if (Math.abs(mappedValue) < 0.01) {
-                // Ball has stopped moving, redirect to a different page
-                redirectToDifferentPage('infopage1.html');
-            }
-        };
-
-        // Example: Assign onclick events to the dots
-        document.querySelectorAll('.dot').forEach((dot, index) => {
-            dot.onclick = () => {
-                // Redirect to different pages based on the dot clicked
-                if (index === 0) {
-                    redirectToDifferentPage('infopage1.html');
-                } else if (index === 1) {
-                    redirectToDifferentPage('engels.html');
-                }
-            };
-        });
-
-        // Render loop
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Update controls
-            controls.update();
-
-            // Rotate the model
-            if (model) {
-                model.rotation.y += 0.01; // Adjust the rotation speed as needed
-            }
-
-            // Render the scene from the perspective of the camera
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
 </body>
 </html>
